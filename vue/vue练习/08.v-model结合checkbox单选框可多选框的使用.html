@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  <label for="agree">-->
+<!--    <input type="checkbox" id="agree" v-model="isAgree">同意协议-->
+<!--  </label>-->
+<!--  <h2>您的选择是：{{isAgree}}</h2>-->
+<!--&lt;!&ndash;  disabled=true时按钮不可以交互，这里isAgree默认是false所以取反&ndash;&gt;-->
+<!--  <button :disabled="!isAgree">下一步</button>-->
+  <label for="basketball">
+    <input type="checkbox" id="basketball" value="篮球" v-model="hobbies">篮球
+  </label>
+  <label for="football">
+    <input type="checkbox" id="football" value="足球" v-model="hobbies">足球
+  </label>
+  <label for="pingpong">
+    <input type="checkbox" id="pingpong" value="乒乓球" v-model="hobbies">兵乓球
+  </label>
+  <label for="yumao">
+    <input type="checkbox" id="yumao" value="羽毛球"  v-model="hobbies">羽毛球
+  </label>
+  <h2>您的选择是:{{hobbies}}</h2>
+  <br>
+  <br>
+  <br>
+<!--  因为大多数时候数据都是从数据库或网络上动态显示的而不是固定死的，所以要选择值绑定-->
+<!--  input的值绑定，就是要多次运用动态绑定相关属性-->
+  <label v-for="item in originHobbies" :for="item">
+    <input type="checkbox" :value="item" :id="item" v-model="hobbies">{{item}}
+  </label>
+  <h2>您的爱好是:{{hobbies}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好呀',
+      isAgree: false,  //单选框
+      hobbies: [], //多选框
+      originHobbies: ['篮球','足球','乒乓球','羽毛球','铅球','排球']
+    },
+    methods: {
+
+    },
+  })
+
+</script>
+</body>
+</html>

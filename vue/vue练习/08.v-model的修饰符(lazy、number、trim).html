@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  lazy修饰符，输入时不会实时绑定，只有当用户按下enter键或者移到输入框外面失去焦点时才会实现v-model绑定-->
+  <input type="text" v-model.lazy="message">{{message}}
+<!--  保证输入的值类型为数字类型-->
+  <input type="text" v-model.number="age">{{age}}
+<!--  保证输入的数据没有空格-->
+  <input type="text" v-model.trim="message">{{message}}
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好呀',
+      age: '',
+    },
+    methods: {
+
+    },
+  })
+
+</script>
+</body>
+</html>

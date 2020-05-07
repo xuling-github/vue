@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <span v-if="isUser">
+    <label for="username">用户账号登录</label>
+    设置key控制input框不复用
+    <input type="text" id="username" placeholder="输入用户账号" key="username">
+  </span>
+  <span v-else>
+    <label for="password">用户密码登录</label>
+    <input type="text" id="password" placeholder="输入用户密码" key="email">
+  </span>
+  <button @click="isUser = !isUser">切换登陆方式</button>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      isUser:true,
+
+    },
+    methods: {
+
+    },
+  })
+
+</script>
+</body>
+</html>

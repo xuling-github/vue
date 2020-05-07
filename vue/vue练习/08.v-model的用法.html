@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  <input type="text" v-model="message">-->
+<!--  v-bind绑定输入框value的值，把message的值赋给它，-->
+<!--  v-on监听input框的input事件，即input框中发生改变是就调用valueChange方法-->
+<!--  <input type="text" :value="message" @input="valueChange">-->
+  $event是指浏览器当前发生的事件
+  <input type="text" :value="message" @input="message=$event.targe.value">
+  {{message}}
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好呀',
+    },
+    methods: {
+      valueChange(event){
+        //获取input框中事件的值赋值给message从而达到改变input框的值改变message的值
+        this.message = event.target.value
+      }
+
+    },
+  })
+
+</script>
+</body>
+</html>

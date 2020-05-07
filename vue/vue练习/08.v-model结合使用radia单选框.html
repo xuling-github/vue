@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  1.为了让两个输入框互斥必须添加name属性，将两个name值设置为同一个，就达到互斥的效果，表单只会选择一种提交-->
+<!--  2.增加label标签，指定他的for属性等于input框的id值，那么只要点击这个input框，就会获取焦点-->
+<!--  3.如果使用v-model,input框不添加name属性也可以达到互斥的效果-->
+  <label for="male">
+<!--    <input type="radio" id="male" name="sex" value="男">男-->
+<!--    3.如果使用v-model,input框不添加name属性也可以达到互斥的效果-->
+    <input type="radio" id="male" value="男" v-model="sex">男
+  </label>
+  <label for="female">
+<!--    <input type="radio" id="female" name="sex" value="女">女-->
+    <input type="radio" id="female" value="女" v-model="sex">女
+  </label>
+  <h2>您当选择的性别是：{{sex}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好呀',
+      // //设置为空值，因为使用v-model双向绑定，选择哪一个input框，哪一个input框的值就会赋给sex
+      // sex: '',
+      //因为是双向绑定，所以可以利用它设置默认值，将sex设置男，那么性别为男的input框就会默认被选中
+      sex: '男'
+    },
+    methods: {
+
+    },
+  })
+
+</script>
+</body>
+</html>

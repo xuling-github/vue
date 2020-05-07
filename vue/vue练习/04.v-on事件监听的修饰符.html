@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  <div @click="divClick">-->
+<!--    <p>aaaaaa</p>-->
+<!--    <button @click.stop="btnClick">按钮</button>-->
+<!--  </div>-->
+  <!--    .stop阻止事件冒泡，即点击按钮的时候不会同时触发它外面的div-->
+  <div @click="divClick">
+    <p>aaaaaa</p>
+    <button @click.stop="btnClick">按钮</button>
+  </div>
+<!--  .prevent阻止默认行为，比如表单提交，用户希望自己提交-->
+  <form>
+    <button @click.prevent="subClick" type="submit" value="提交">提交</button>
+  </form>
+<!--  键帽的监听，只在用户按下enter键时调用keyUP-->
+  <input type="text" @keyup.enter="keyUp">
+<!--  只做一次-->
+  <button @click.once="btn2Click">按钮2</button>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好呀',
+    },
+    methods: {
+      btnClick(){
+        console.log('调用按钮了')
+
+      },
+      divClick(){
+        console.log('调用div了')
+      },
+      subClick(){
+        console.log('需要您自己提交被调用啦')
+      },
+      keyUp(){
+        console.log('调用keyup事件')
+      },
+      btn2Click(){
+        console.log('btn2Click')
+      }
+
+    },
+  })
+
+</script>
+</body>
+</html>
