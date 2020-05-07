@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  3.使用组件，注意：必须放在Vue的实例里面组件才有效果-->
+  <my-cpn></my-cpn>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  // ES6中使用``包含字符串可以直接换行，而不像ES5中用连字符'' +
+  //''达到换行效果
+  // 1.创建组件构造器对象componentConstruct简写成cpnC
+  const cpnC =  Vue.extend({
+    template: `
+    <div>
+    <h2>我是标题</h2>
+    <p>我是内容一</p>
+    <p>我是内容二</p>
+  </div>
+    `
+  })
+  // 2.注册组件Vue.component(自定义组件名称，使用的组件构造器名称）
+  Vue.component('my-cpn',cpnC)
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好呀',
+    },
+    methods: {
+
+    },
+  })
+
+</script>
+</body>
+</html>

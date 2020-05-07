@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn :number1="num1"
+       :number2="num2"
+       @num1change="num1change"
+       @num2change="num2change"></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <p>props:{{number1}}</p>
+    <p>data:{{dnumber1}}</p>
+<!--    <input type="text" v-model="dnumber1"> //这一步值改变了data的dnumber的值-->
+    <input type="text" :value="dnumber1" @input="num1Input">
+    <p>props:{{number2}}</p>
+    <p>data:{{dnumber2}}</p>
+<!--    <input type="text" v-model="dnumber2">-->
+    <input type="text" :value="dnumber2" @input="num2Input">
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      num1: 0,
+      num2: 1
+    },
+    methods: {
+      num1change(value){
+        this.num1 = parseFloat(value)
+      },
+      num2change(value){
+        this.num2 = parseFloat(value)
+      }
+
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+        props: {
+          number1: Number, //指定数据类型为Number类型
+          number2: Number,
+        },
+        //想要改变子组件props的值官方不建议直接绑定，而应该建立一个data函数，这个函数返回props的值
+        data(){
+          return {
+            dnumber1: this.number1,
+            dnumber2: this.number2
+          }
+        },
+        methods: {
+          num1Input(event){
+            this.dnumber1 = event.target.value;
+            //子传父，发出自定义事件，当输入框的值改变时父组件中的num1也改变
+            this.$emit('num1change', this.dnumber1);
+            //当dnumber1改变时dnumber2变为他的100倍
+            this.dnumber2 = this.dnumber1 * 100;
+            //同时需要发出num2change事件
+            this.$emit('num2change', this.dnumber2)
+          },
+          num2Input(event){
+            this.dnumber2 = event.target.value;
+            this.$emit('num2change', this.dnumber2);
+            //当dnumber2改变时dnumber1变为他的1/100倍
+            this.dnumber1 = this.dnumber2 / 100;
+            //同时需要发出num1change事件
+            this.$emit('num1change',  this.dnumber2)
+          }
+        }
+      }
+    },
+
+  })
+
+</script>
+</body>
+</html>

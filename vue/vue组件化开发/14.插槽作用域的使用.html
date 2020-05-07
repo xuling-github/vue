@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  什么都不写就直接使用默认-->
+  <cpn></cpn>
+<!--  cpn标签的作用域问题：Vue只会把他当一个标签，cpn里面所有的属性要使用的值，vue都会去root组件寻找-->
+<!--  这里我们需要利用slot替换父组件的标签，但是标签的内容用子组件的，-->
+<!--  但因为作用域的问题，一般标签内容只会去root组件查找-->
+<!--  所以我们需要给子组件的slot绑定一个值:abc=子组件的内容，
+并且在是使用cpn组件时template标签指定slot-scope='slot',之后直接使用子组件的内容，这里时slot.data-->
+  <cpn>
+    <template slot-scope="slot">
+      <spn v-for="item in slot.data">{{item}} -</spn>
+    </template>
+  </cpn>
+</div>
+<template id="cpn">
+  <div>
+<!--    给子组件的slot绑定一个值:abc=子组件的内容-->
+    <slot :data="planguages">
+    <ul v-for="item in planguages">
+      <li>{{item}}</li>
+    </ul>
+  </slot>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好呀',
+    },
+    methods: {
+
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+        data(){
+          return {
+            planguages: ['python','javascript','Go','C++']
+          }
+        }
+      }
+    }
+  })
+
+</script>
+</body>
+</html>

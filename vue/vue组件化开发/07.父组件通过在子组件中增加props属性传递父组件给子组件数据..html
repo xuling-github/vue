@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  使用从父组件传递过来的数据-->
+<!--  这里用v-bind让它去Vue实例中去寻找这个movies变量，不加的话他会把movies当作字符串直接显示在浏览器不作解析-->
+<!--  <cpn v-bind:cmovies="movies" :cmessage="message"></cpn>-->
+<!--  使用cmessage默认值-->
+<!--  <cpn v-bind:cmovies="movies"></cpn>-->
+<!--  必传值-->
+  <cpn :cmessage></cpn>
+</div>
+<template id="cpn">
+  <div>
+<!--    <p>{{cmovies}}</p>-->
+    <p v-for="item in cmovies">{{item}}</p>
+    <h2>{{cmessage}}</h2>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  //父传子：props
+  const cpn = {
+    template: '#cpn',
+    // 一：使用数组
+    // props: ['cmovies', 'cmessage']
+    // 二、使用对象,常用
+    props: {
+      //1.限制数据类型
+      //cmovies: Array,
+      // cmessage: String,
+      //2.设置默认值,当在使用Vue实例时没有写需要cmessage但时我们的组件模板中又有cmessage时，会使用默认值
+      cmessage: {
+        type: String,
+        default: '徐玲，您好！',
+        //在使用Vue实例时必须写:cmessage,不然报错missing required props:xxxx
+        required: true
+      },
+      cmovies: {
+        type: Array,
+        // defualt: []
+        //在vue的一些版本中如果props里面的key是一个数组或对象类型时,他的默认值必须是一个工厂函数
+        default(){
+          return []
+        }
+
+      }
+    }
+
+  }
+  //root组件
+  const app = new Vue({
+    el: '#app',
+    data: {
+      movies: ['海贼王', '哪吒闹海', '大力水手'],
+      message: 'hello world'
+    },
+    components: {
+      //ES6中属性的增强写法，直接写key就行
+      cpn
+    },
+    methods: {
+
+    },
+  })
+
+</script>
+</body>
+</html>

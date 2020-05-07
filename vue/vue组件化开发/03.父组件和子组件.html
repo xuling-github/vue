@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--使用包含组件一的组件二,注意在这里不能直接使用组件一，不然报错unknown custom element(未知的自定义元素）-->
+  <cpn2></cpn2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  //1.创建第一个组件器
+  const cpnC1 =  Vue.extend({
+    template: `
+    <div>
+    <h2>我是标题一</h2>
+    <p>我是内容一</p>
+  </div>
+    `
+  })
+  //2.创建第二个组件器
+  const cpnC2 =  Vue.extend({
+    template: `
+    <div>
+    <h2>我是标题二</h2>
+    <p>我是内容二</p>
+    <!--  因为在第三步已经注册了第一个组件，所以可以在这里直接使用,注意要包在一个div之中，不然报错-->
+        <cpn1></cpn1>
+  </div>
+    `,
+    //3.在第二个组件构造器中注册第一个组件构造器，变成他的父组件
+    components:{
+      cpn1: cpnC1,
+    }
+  })
+
+  const app = new Vue({
+    el: '#app',
+    // 4.在Vue实例中注册第二个组件，所以Vue实例也被叫做根组件root组件
+    components: {
+      cpn2:cpnC2
+    },
+    data: {
+      message: '你好呀',
+    },
+    methods: {
+
+    },
+  })
+
+</script>
+</body>
+</html>

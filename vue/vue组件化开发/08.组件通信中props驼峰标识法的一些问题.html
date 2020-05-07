@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  这里驼峰标识命名时需要换一种用'-'连接的方式,不然报错-->
+  <cpn :c-info="info" :child-my-message="message"></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <p>{{cInfo}}</p>
+    <p>{{childMyMessage}}</p>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const cpn = {
+    template: '#cpn',
+    props: {
+      cInfo: {
+        type: Object,
+        default(){
+          return {}
+        }
+      },
+      childMyMessage: {
+        type: String,
+        default: 0
+      }
+    }
+  }
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好呀',
+      info: {
+        name: 'why',
+        age: 18,
+        sex: 'female'
+      }
+    },
+    components: {
+      cpn
+    }
+  })
+
+</script>
+</body>
+</html>

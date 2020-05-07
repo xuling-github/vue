@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn ref="aaa"></cpn>
+  <button @click="btnClick">按钮</button>
+</div>
+<template id="cpn">
+  <div>我是子组件</div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好呀',
+    },
+    methods: {
+      btnClick(){
+        // 1.通过$children访问，结果是一个数组，一般用索引访问，
+        // 但是索引很容易因为插入或减少了其他标签被改变，所以开发中不常用$children
+        // console.log(this.$children);
+        // this.$children[0].showMessage();
+        // console.log(this.$children[0].name);
+        // 2.通过$refs,结果是一个对象，在使用vue实例时添加一个ref属性作为这个结果的key
+        //开发中常用refs
+        console.log(this.$refs.aaa.name)
+      }
+
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+        data(){
+          return {
+            name: 'carrie'
+          }
+        },
+        methods: {
+          showMessage(){
+            console.log('showMessage')
+          }
+        }
+      }
+    }
+  })
+
+</script>
+</body>
+</html>

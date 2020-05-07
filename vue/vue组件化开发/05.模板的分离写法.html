@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn></cpn>
+</div>
+<script src="../js/vue.js"></script>
+<!--1.script标签，类型必须为text/x-template,设置一个id-->
+<!--<script type="text/x-template" id="cpn">-->
+<!-- <div>-->
+<!--   <h3>我是标题一</h3>-->
+<!--   <p>哈哈哈哈哈</p>-->
+<!-- </div>-->
+<!--</script>-->
+<!--2.template标签-->
+<template id="cpn">
+  <div>
+   <h3>我是标题一</h3>
+   <p>哈哈哈哈哈</p>
+ </div>
+</template>
+<script>
+  //#cpn将两者联系起来
+  Vue.component('cpn',{
+    template: '#cpn'
+  })
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好呀',
+    },
+  })
+
+</script>
+</body>
+</html>

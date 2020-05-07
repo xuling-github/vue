@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn></cpn>
+</div>
+<script src="../js/vue.js"></script>
+<template id="cpn">
+  <div>
+<!--    这里就可以直接用mustache语法使用组件中的data属性-->
+   <h3>{{title}}</h3>
+   <p>哈哈哈哈哈</p>
+    <br>
+  <button @click="increment">+</button>
+  <p>总计：{{counter}}</p>
+  <button @click="decrement">-</button>
+  </div>
+</template>
+<script>
+  //#cpn将两者联系起来
+  //组件中有它自己的数据存放属性，data,但data必须是一个函数，且函数返回一个实例即一个对象
+  Vue.component('cpn',{
+    template: '#cpn',
+    data(){
+      return {
+        title: 'hello world',
+        counter: 0
+      }
+    },
+    methods: {
+      increment(){
+        this.counter++
+      },
+      decrement(){
+        this.counter--
+      }
+    }
+  })
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好呀',
+    },
+  })
+
+</script>
+</body>
+</html>
